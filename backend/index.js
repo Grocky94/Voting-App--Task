@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import { AllRepresentator, CurrentUser, login, register, voting } from "./controllers/user_controllers.js";
-import { addRep } from "./controllers/admin_controllers.js";
+import { addRep, deleteSingleCandidate, updateRepName } from "./controllers/admin_controllers.js";
 
 const app = express();
 app.use(cors());
@@ -15,12 +15,16 @@ app.get("/", (req, res) => {
 })
 app.post("/register", register);
 app.post("/login", login);
-app.post('/currentUser',CurrentUser);
+app.post('/currentUser', CurrentUser);
 app.get("/voteList", AllRepresentator);
 app.post('/voting', voting);
 
+
 // admin part
 app.post("/addRep", addRep);
+app.post('/add', addRep);
+app.patch('/update', updateRepName);
+app.post('/deleteSelectedCandidate', deleteSingleCandidate)
 
 mongoose.connect(process.env.mongo_URL).then(() => console.log("connected to mongoDB"));
 

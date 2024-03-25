@@ -3,3 +3,242 @@
   margin: 0;
   padding: 0;
 }
+
+.nav {
+  border: 1px solid #FFF6F6;
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  background-color: #FFC4C4;
+  position: fixed;
+  top: 0
+}
+
+.logo {
+  height: 100%;
+  width: 10%;
+  /* border: 1px solid #000; */
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.logo>img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  background-color: #FFC4C4;
+}
+
+.navbar-log {
+  height: 100%;
+  width: 10%;
+  border: 1px solid #FFF6F6;
+  display: flex;
+  margin-left: auto;
+  margin-right: 0;
+  color: rgb(220, 113, 113);
+  font-size: 1.1em;
+  font-weight: bolder;
+  justify-content: center;
+  border-radius: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown {
+  /* height: 8vh; */
+  width: 10%;
+  margin-top: 9vh;
+  right: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid #000;
+  position: absolute;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.dropdown-child {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.dropdown-child:active {
+  background-color: green;
+  color: white;
+  border: none;
+}
+
+.card {
+  /* height: 50vh; */
+  width: 25%;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 10vh;
+}
+
+.customeMessage {
+  height: 5vh;
+  margin: auto;
+  border: 1px solid black;
+  width: fit-content;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.inputboxDiv {
+  /* height: 5vh; */
+  width: 100%;
+  margin-top: 10%;
+  /* border: 1px solid black; */
+}
+
+.inputTag {
+  height: 4.3vh;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.inputTag[type="number"] {
+  /* Remove the up and down arrows for number input */
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  height: 4.3vh;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.inputTag:focus-within {
+  outline-color: green;
+}
+
+.buttonDiv {
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20%;
+}
+
+.buttonDiv>button {
+  width: 150px;
+  height: 5vh;
+  border-radius: 5px;
+  outline: none;
+}
+
+.buttonDiv>button:active {
+  background-color: green;
+  color: white;
+  border: none;
+}
+
+.validationDiv {
+  height: 3vh;
+  width: 100%;
+  /* border: 1px solid #000; */
+  text-align: center;
+  color: red;
+}
+
+.alreadyMadeVoteDiv {
+  white-space: nowrap;
+  width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.candidateTable {
+  width: 60%;
+  margin: auto;
+  margin-top: 20vh;
+  /* border: 1px solid #000; */
+}
+
+.candidatedetail {
+  width: 90%;
+  height: 5vh;
+  margin: auto;
+  margin-top: 1%;
+  display: flex;
+  margin-bottom: 2%;
+  justify-content: space-around;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.candidatedetail-inputDiv {
+  height: 100%;
+  width: 8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.candidatedetail-inputDiv>input {
+  height: 20px;
+  width: 20px;
+}
+
+.candidatedetail-name {
+  height: 100%;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid black;
+}
+
+.voteButton {
+  height: 5vh;
+  width: 20%;
+  margin-left: 40%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+  outline: none;
+}
+
+.voteButton:active {
+  color: white;
+  border: none;
+  background-color: green;
+}
+
+#profile-card {
+  /* height:500px; */
+  width: 70%;
+  margin: 1%;
+  border: 1px solid rgb(176, 173, 173);
+  margin: auto;
+  margin-top: 10%;
+  border-radius: 10px;
+}
+
+.profile-card-header {
+  margin: 2%;
+}
+
+.profile-detail {
+  display: flex;
+  justify-content: space-between;
+  margin: 2%
+}

@@ -10,11 +10,20 @@ export const register = async (req, res) => {
         if (!name || !email || !password || !phone) return res.status(404).json({ success: false, message: "All fields are mandatory" });
 
         const emailAlreadyExist = await user_model.find({ email: email });
+
         if (emailAlreadyExist.length) {
-            return res.status(403).json({ success: false, message: "UserName already exist" })
+            return res.status(403).json({ success: false, message: "This Email already exist. Please use different email" })
         };
         const Hashpassword = await bcrypt.hash(password, 10);
-        const NewUser = new user_model({ name, email, password: Hashpassword, phone, role: "User", vote });
+
+        const NewUser = new user_model({
+            name, email,
+            password: Hashpassword,
+            phone,
+            role: "User",
+            vote
+        });
+
         await NewUser.save();
         res.status(200).json({ success: true, message: "New User have been register Cheers!!", NewUser })
     } catch (error) {
@@ -50,7 +59,7 @@ export const login = async (req, res) => {
                 return res.status(200).json({ success: true, message: "login successfull", user: userObject, token: token })
             }
         }
-        return res.status(400).json({ success: false, message: "password is wrong" })
+        return res.status(400).json({ success: false, message: "Wrong Password. Please try again" })
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message })
     }
@@ -84,7 +93,7 @@ export const CurrentUser = async (req, res) => {
 
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
-        // console.log(error)
+        
     }
 }
 
@@ -107,7 +116,7 @@ export const voting = async (req, res) => {
 
         // Check if token or representor_id is missing
         if (!token || !representor_id) {
-            return res.status(400).json({ success: false, message: "Token or representor_id missing" });
+            return res.status(400).json({ success: false, message: "You have not selected the candidate to vote!!" });
         }
 
         // Verify JWT token

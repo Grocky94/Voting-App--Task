@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios";
 import { AuthContext } from '../context/Auth';
 import { useNavigate } from 'react-router-dom';
+import "../App.css"
 const Home = () => {
     const [candidate, setCandidate] = useState([]);
     const [message, setMessage] = useState('');
@@ -58,20 +59,25 @@ const Home = () => {
 
     return (
         <div>
-            {message && <div style={{ height: "5vh", margin: "auto", border: "1px solid black", width: "30%", marginTop: "5%", marginBottom: "-7%", display: "flex", alignItems: "center", justifyContent: "center", color: message === 'success' ? 'green' : 'red' }}>{message}</div>}
-            <div style={{ width: "30%", margin: "auto", border: "1px solid black", marginTop: "20vh" }}>
-                <form style={{ border: "1px solid black" }}>
+            {message && <div className='customeMessage' style={{ color: message.includes('success') ? 'green' : 'red' }}>{message}</div>}
+            <div className='candidateTable' >
+                {state?.user?.vote === false ? <form>
+                    <div className='candidatedetail'>
+                        <div className='candidatedetail-inputDiv'>Vote</div>
+                        <div className="candidatedetail-name" >Candidate Name</div>
+                    </div>
                     {candidate.map((rep) => (
-                        <div key={rep._id} style={{ width: "90%", height: "5vh", margin: "auto", marginTop: "1%", display: "flex" }}>
-                            <div style={{ height: "100%", width: "10%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div className='candidatedetail' key={rep._id}>
+                            <div className='candidatedetail-inputDiv'>
                                 <input type='radio' name='candidate' value={rep._id} onChange={() => setOptionSelected(rep._id)} checked={optionSelected === rep._id} />
                             </div>
-                            <div style={{ height: "100%", width: "90%", border: "1px solid black", display: "flex", alignItems: "center", justifyContent: "start" }}>
+                            <div className="candidatedetail-name" >
                                 {rep.representor}
                             </div>
                         </div>))}
-                    <button style={{ height: "5vh", width: "fit-content", marginLeft: "45%", marginTop: "2%", marginBottom: "2%" }} onClick={(e) => applyVote(optionSelected, e)}>Vote</button>
-                </form>
+                    <button className='voteButton' style={{}} onClick={(e) => applyVote(optionSelected, e)}>Vote</button>
+                </form> :
+                    <div className='alreadyMadeVoteDiv'> You have already made your vote !! thank you for your active enrollment</div>}
             </div>
         </div>
     )

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import "../App.css"
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/Auth';
@@ -7,16 +8,36 @@ const Login = () => {
     const [userData, setUserData] = useState({ email: "", password: "" });
     const redirect = useNavigate();
     const [message, setMessage] = useState('');
-    const { dispatch } = useContext(AuthContext)
+    const [validation, setValidation] = useState({ email: '', password: '' })
+    const { dispatch } = useContext(AuthContext);
+
 
     const handleChange = (event) => {
         setUserData({ ...userData, [event.target.name]: event.target.value })
+        setValidation({ ...validation, [event.target.name]: "" })
     }
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:5000/login", { userData })
+        let isValid = true;
+        const newValidation = { email: '', password: '' };
 
+        if (!userData.email) {
+            isValid = false;
+            newValidation.email = "Please enter a valid email.";
+        }
+
+        if (!userData.password) {
+            isValid = false;
+            newValidation.password = "Please enter paswword";
+        }
+
+        if (!isValid) {
+            setValidation(newValidation);
+            return;
+        }
+
+        try {
+            const response = await axios.post("http://localhost:5000/login", { userData });
             if (response?.data?.success) {
                 console.log("response?.data?.success:", response?.data?.message)
                 setUserData({ email: "", password: "" })
@@ -30,7 +51,8 @@ const Login = () => {
                 setTimeout(() => {
                     if (response?.data?.user?.role === "Admin") {
                         redirect('/adminPage');
-                    } else {
+                    }
+                    else {
                         redirect('/');
                     }
                 }, 2000);
@@ -40,7 +62,7 @@ const Login = () => {
 
             }
         } catch (error) {
-            setMessage(error);
+            setMessage(error.response.data.message);
             setUserData({ email: "", password: "" })
         }
 
@@ -63,12 +85,19 @@ const Login = () => {
 
     return (
         <div>
-            {message && <div style={{ height: "5vh", margin: "auto", border: "1px solid black", width: "30%", marginTop: "5%", marginBottom: "-7%", display: "flex", alignItems: "center", justifyContent: "center", color: message.includes('success') ? 'green' : 'red' }}>{message}</div>}
-            <div style={{ height: "50vh", width: "25%", margin: "auto", border: "1px solid black", marginTop: "20vh" }}>
+            {message && <div className='customeMessage' style={{ color: message.includes('success') ? 'green' : 'red' }}>{message}</div>}
+            <div className='card'>
                 <form onSubmit={handleSubmit}>
-                    <div style={{ height: "5vh", width: "100%", marginTop: "20%" }}><input placeholder='EMAIL' style={{ height: "4.3vh", width: "60%", marginLeft: "20%" }} name="email" onChange={handleChange} value={userData.email} /></div>
-                    <div style={{ height: "5vh", width: "100%", marginTop: "15%" }}><input placeholder='PASSWORD' style={{ height: "4.3vh", width: "60%", marginLeft: "20%" }} name="password" onChange={handleChange} value={userData.password} /></div>
-                    <div style={{ height: "8vh", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-evenly", marginTop: "20%", }}>
+                    <div className='inputboxDiv'>
+                        <input className='inputTag' placeholder='EMAIL' name="email" type='email' onChange={handleChange} value={userData.email} style={{ borderColor: validation.email ? "red" : "" }} />
+                        {validation.email && <div className='validationDiv'>{validation.email}</div>}
+                    </div>
+                    <div className='inputboxDiv'>
+                        <input className='inputTag' placeholder='PASSWORD' type='text' name="password" onChange={handleChange} value={userData.password} style={{ borderColor: validation.password ? "red" : "" }} />
+                        {validation.password && <div className='validationDiv'>{validation.password}</div>}
+
+                    </div>
+                    <div className='buttonDiv'>
                         <button type='submit'>Login</button>
                         <button onClick={() => redirect('/register')}>Register</button>
                     </div>

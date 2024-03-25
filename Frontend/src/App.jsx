@@ -5,6 +5,7 @@ import Login from "./component/Login";
 import Home from "./component/Home";
 import Navbar from "./component/Navbar";
 import AdminPage from './component/AdminPage';
+import Profile from './component/Profile';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path='/adminPage' element={<AdminPage />} />
+        <Route exact path='/profile' element={<Profile />} />
       </Routes>
     </>
   )
