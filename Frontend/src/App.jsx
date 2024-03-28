@@ -6,6 +6,8 @@ import Home from "./component/Home";
 import Navbar from "./component/Navbar";
 import AdminPage from './component/AdminPage';
 import Profile from './component/Profile';
+import DisableWindow from './component/DisableWindow';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path='/adminPage' element={<AdminPage />} />
         <Route exact path='/profile' element={<Profile />} />
+        <Route exact path='/disablewindow' element={<DisableWindow />} />
       </Routes>
     </>
   )

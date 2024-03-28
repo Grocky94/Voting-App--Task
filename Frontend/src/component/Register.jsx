@@ -76,19 +76,19 @@ const Register = () => {
             <div className='card'>
                 <form onSubmit={handleSubmit}>
                     <div className='inputboxDiv'>
-                        <input placeholder='USERNAME' className='inputTag' name='name' type="text" onChange={handleChange} value={userData.name} style={{ borderColor: validation.name ? "red" : "" }} />
+                        <input placeholder='USERNAME' className='inputTag' name='name' type="text" onChange={handleChange} value={userData.name} style={{ borderColor: validation.name ? "red" : "" }} autoComplete='off' />
                         {validation.name && <div className='validationDiv'>{validation.name}</div>}
                     </div>
                     <div className='inputboxDiv'>
-                        <input placeholder='EMAIL ID' className='inputTag' name='email' type="email" onChange={handleChange} value={userData.email} style={{ borderColor: validation.email ? "red" : "" }} />
+                        <input placeholder='EMAIL ID' className='inputTag' name='email' type="email" onChange={handleChange} value={userData.email} style={{ borderColor: validation.email ? "red" : "" }} autoComplete='off' />
                         {validation.email && <div className='validationDiv'>{validation.email}</div>}
                     </div>
                     <div className='inputboxDiv'>
-                        <input placeholder='PHONE NO' className='inputTag' name='phone' type="number" onChange={handleChange} value={userData.phone} style={{ borderColor: validation.phone ? "red" : "" }} />
+                        <input placeholder='PHONE NO' className='inputTag' name='phone' type="number" onChange={handleChange} value={userData.phone} style={{ borderColor: validation.phone ? "red" : "" }} autoComplete='off' />
                         {validation.phone && <div className='validationDiv'>{validation.phone}</div>}
                     </div>
                     <div className='inputboxDiv'>
-                        <input placeholder='PASSWORD' className='inputTag' name='password' type="text" onChange={handleChange} value={userData.password} style={{ borderColor: validation.password ? "red" : "" }} />
+                        <input placeholder='PASSWORD' className='inputTag' name='password' type="password" onChange={handleChange} value={userData.password} style={{ borderColor: validation.password ? "red" : "" }} autoComplete='off' />
                         {validation.password && <div className='validationDiv'>{validation.password}</div>}
                     </div>
                     {/* <div style={{ height: "5vh", border: "1px solid black", width: "100%", marginTop: "10%" }}><select placeholder='PHONE NO' style={{ height: "100%", width: "60%", marginLeft: "20%" }} name='role' onChange={handleChange} value={userData.role}>

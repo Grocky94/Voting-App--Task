@@ -28,7 +28,6 @@ const Auth = ({ children }) => {
     useEffect(() => {
         async function getCurrentUser() {
             let token = JSON.parse(localStorage.getItem('token'))
-            // console.log("token:", token)
             if (token) {
                 try {
                     let response = await axios.post('http://localhost:5000/currentUser', { token })

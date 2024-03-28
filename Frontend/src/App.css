@@ -144,6 +144,19 @@
   outline: none;
 }
 
+.Adminbutton {
+  width: 150px;
+  height: 5vh;
+  border-radius: 5px;
+  outline: none;
+}
+
+.Adminbutton:active {
+  background-color: green;
+  color: white;
+  border: none;
+}
+
 .buttonDiv>button:active {
   background-color: green;
   color: white;
@@ -241,4 +254,8 @@
   display: flex;
   justify-content: space-between;
   margin: 2%
+}
+
+.adminCard::-webkit-scrollbar {
+  display: none;
 }

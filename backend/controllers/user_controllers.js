@@ -52,7 +52,8 @@ export const login = async (req, res) => {
                 _id: user._id,
                 role: user.role,
                 number: user.number,
-                vote: user.vote
+                vote: user.vote,
+                phone: user?.phone
             }
             const token = jwt.sign({ _id: user._id }, process.env.secret)
             if (token) {
@@ -93,21 +94,22 @@ export const CurrentUser = async (req, res) => {
 
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
-        
+
     }
 }
-
 export const AllRepresentator = async (req, res) => {
     try {
         const response = await candidate_model.find({});
         if (response.length) {
-            res.status(200).json({ success: true, representor: response })
+            res.status(200).json({ success: true, representor: response });
+        } else {
+            res.status(400).json({ success: false, message: "No valid Representator found" });
         }
-        // res.status(400).json({ success: false, message: "No Represator " })
     } catch (error) {
-        return res.status(500).json({ success: false, message: error.message })
+        return res.status(500).json({ success: false, message: error.message });
     }
 }
+
 
 
 export const voting = async (req, res) => {

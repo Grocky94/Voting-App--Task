@@ -5,17 +5,29 @@ import { useNavigate } from 'react-router-dom';
 import "../App.css"
 const Home = () => {
     const [candidate, setCandidate] = useState([]);
+    console.log("candidate:", candidate)
     const [message, setMessage] = useState('');
     const [optionSelected, setOptionSelected] = useState("");
     const { state } = useContext(AuthContext);
     const redirect = useNavigate();
 
+    useEffect(() => {
+        for (let i = 0; i < candidate.length; i++) {
+            let disable = candidate[i].active
+            if (disable === true) {
+                redirect('/disablewindow')
+            } else {
+                redirect('/')
+            }
+        }
+    }, [candidate])
 
     useEffect(() => {
         async function dashboad() {
             try {
                 const response = await axios.get("http://localhost:5000/voteList");
-                if (response.data.success) {
+                console.log("response:", response)
+                if (response?.data?.success) {
                     setCandidate(response.data.representor);
                 }
             } catch (error) {
@@ -27,13 +39,9 @@ const Home = () => {
 
     const applyVote = async (seletor, event) => {
         event.preventDefault(); // Prevent default form submission
-        console.log("selector", seletor)
         try {
             const token = JSON.parse(localStorage.getItem("token"));
-            console.log("token:", token)
-
             const response = await axios.post("http://localhost:5000/voting", { token, representor_id: seletor });
-            console.log("response:", response)
             if (response?.data?.success) {
                 setMessage(response?.data?.message)
                 setOptionSelected("");
@@ -47,11 +55,19 @@ const Home = () => {
 
     }
     useEffect(() => {
-        if (!state || !state.user || state.user.role !== 'User') {
-            setMessage('Page not accessible');
-            redirect('/login');
-        }
+        const checkUserRole = () => {
+            if (state && state.user && state.user.role === 'User') {
+                redirect('/');
+            } else if (state && state.user && state.user.role === 'Admin') {
+                redirect('/adminPage');
+            } else {
+                redirect('/login');
+            }
+        };
+
+        checkUserRole()
     }, [state, redirect]);
+
 
     setTimeout(() => {
         setMessage('');

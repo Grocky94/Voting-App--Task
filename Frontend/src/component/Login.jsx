@@ -48,14 +48,14 @@ const Login = () => {
                     type: "Login",
                     payload: response.data.user
                 })
-                setTimeout(() => {
+                // setTimeout(() => {
                     if (response?.data?.user?.role === "Admin") {
                         redirect('/adminPage');
                     }
                     else {
                         redirect('/');
                     }
-                }, 2000);
+                // }, 2000);
             } else {
                 setMessage(response.data.message);
                 setUserData({ email: "", password: "" })
@@ -72,28 +72,26 @@ const Login = () => {
 
     }
     useEffect(() => {
-        const Checker = () => {
-            let alreadyIn = JSON.parse(localStorage.getItem("token"))
+        const Checker = async () => {
+            let alreadyIn = JSON.parse(localStorage.getItem("token"));
             if (alreadyIn) {
-                redirect('/login');
+                redirect('/');
             }
-        }
-        Checker()
-    }, [redirect])
-
-
-
+        };
+        Checker();     
+    }, []); 
+    
     return (
         <div>
             {message && <div className='customeMessage' style={{ color: message.includes('success') ? 'green' : 'red' }}>{message}</div>}
             <div className='card'>
                 <form onSubmit={handleSubmit}>
                     <div className='inputboxDiv'>
-                        <input className='inputTag' placeholder='EMAIL' name="email" type='email' onChange={handleChange} value={userData.email} style={{ borderColor: validation.email ? "red" : "" }} />
+                        <input className='inputTag' placeholder='EMAIL' name="email" type='email' onChange={handleChange} value={userData.email} style={{ borderColor: validation.email ? "red" : "" }} autoComplete='off' />
                         {validation.email && <div className='validationDiv'>{validation.email}</div>}
                     </div>
                     <div className='inputboxDiv'>
-                        <input className='inputTag' placeholder='PASSWORD' type='text' name="password" onChange={handleChange} value={userData.password} style={{ borderColor: validation.password ? "red" : "" }} />
+                        <input className='inputTag' placeholder='PASSWORD' type='password' name="password" onChange={handleChange} value={userData.password} style={{ borderColor: validation.password ? "red" : "" }} autoComplete='off'/>
                         {validation.password && <div className='validationDiv'>{validation.password}</div>}
 
                     </div>
